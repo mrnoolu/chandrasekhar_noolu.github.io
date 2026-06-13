@@ -1,0 +1,22 @@
+[build]
+  base    = "site"
+  command = "npm install && npm run build"
+  publish = "_site"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[redirects]]
+  from = "/blog"
+  to   = "/blog.html"
+  status = 301
+
+[[redirects]]
+  from = "/projects"
+  to   = "/projects.html"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to   = "/contact.html"
+  status = 301
