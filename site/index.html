@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chandra Sekhar Noolu | Oracle Fusion Cloud SCM Consultant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0D1B2A;
+      --navy-mid:#122034;
+      --blue:    #2563EB;
+      --sky:     #0EA5E9;
+      --teal:    #0D9488;
+      --white:   #FFFFFF;
+      --offwhite:#FAFBFD;
+      --surface: #F1F5F9;
+      --border:  #E2E8F0;
+      --text:    #0F172A;
+      --muted:   #64748B;
+      --light:   #94A3B8;
+      --grad:    linear-gradient(135deg, var(--blue), var(--sky));
+      --font-display: 'Plus Jakarta Sans', sans-serif;
+      --font-body:    'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--offwhite);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6vw;
+      height: 64px;
+      background: rgba(13,27,42,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: background 0.3s;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+    .nav-logo span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--grad);
+      color: var(--white) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+    }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; align-items: center;
+      background: var(--navy);
+      overflow: hidden;
+      padding: 80px 6vw 60px;
+    }
+    #hero canvas {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      opacity: 0.35; pointer-events: none;
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 760px;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(37,99,235,0.18);
+      border: 1px solid rgba(37,99,235,0.35);
+      color: var(--sky);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--sky); animation: pulse-dot 2s infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.6rem, 6vw, 4.5rem);
+      line-height: 1.08;
+      color: var(--white);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.6rem;
+    }
+    .hero-name .accent { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    .hero-role {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.6);
+      max-width: 540px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--grad);
+      color: var(--white);
+      font-weight: 600; font-size: 0.9rem;
+      padding: 0.75rem 1.6rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.8);
+      font-weight: 500; font-size: 0.9rem;
+      padding: 0.75rem 1.6rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.55); color: var(--white); transform: translateY(-1px); }
+
+    .hero-stats {
+      position: absolute; bottom: 3rem; right: 6vw; z-index: 2;
+      display: flex; gap: 2.5rem;
+    }
+    .stat { text-align: right; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem; font-weight: 800;
+      color: var(--white);
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.45); letter-spacing: 0.05em; text-transform: uppercase; margin-top: 4px; }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 6vw; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-weight: 800; letter-spacing: -0.03em;
+      color: var(--text); line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+    .section-sub { color: var(--muted); font-size: 1rem; max-width: 540px; line-height: 1.7; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid; grid-template-columns: 260px 1fr;
+      gap: 4rem; align-items: start; margin-top: 3rem;
+    }
+    .about-card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+    .avatar-ring {
+      width: 100px; height: 100px; border-radius: 50%;
+      background: var(--grad);
+      margin: 0 auto 1rem;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-size: 2rem; font-weight: 800; color: var(--white);
+    }
+    .about-card h3 {
+      font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
+      color: var(--text); margin-bottom: 0.25rem;
+    }
+    .about-card p { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.25rem; }
+    .about-meta { display: flex; flex-direction: column; gap: 0.6rem; text-align: left; }
+    .meta-row { display: flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; color: var(--muted); }
+    .meta-row svg { flex-shrink: 0; color: var(--blue); }
+    .meta-row strong { color: var(--text); font-weight: 500; }
+
+    .about-content h3 {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 1.3rem; margin-bottom: 1rem; color: var(--text);
+    }
+    .about-content p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; font-size: 0.97rem; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+    .tag {
+      font-size: 0.78rem; font-weight: 500;
+      padding: 0.3rem 0.85rem; border-radius: 100px;
+      background: rgba(37,99,235,0.08); color: var(--blue);
+      border: 1px solid rgba(37,99,235,0.18);
+    }
+
+    /* ── EXPERTISE (PIPELINE) ── */
+    #expertise { background: var(--offwhite); }
+    .expertise-header { margin-bottom: 3rem; }
+    .pipeline-label {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .pipeline-label::before, .pipeline-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    .pipeline-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .pipeline-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      cursor: default;
+    }
+    .pipeline-card:hover {
+      border-color: var(--blue);
+      box-shadow: 0 4px 20px rgba(37,99,235,0.12);
+      transform: translateY(-3px);
+    }
+    .pipeline-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(37,99,235,0.08);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem; font-size: 1.25rem;
+    }
+    .pipeline-card h4 {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 0.95rem; color: var(--text); margin-bottom: 0.4rem;
+    }
+    .pipeline-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+    .pipeline-badge {
+      display: inline-block; margin-top: 0.75rem;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 4px;
+      background: rgba(13,148,136,0.1); color: var(--teal);
+      border: 1px solid rgba(13,148,136,0.2);
+    }
+
+    /* ── TECH STACK ── */
+    .tech-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2.5rem; }
+    .tech-chip {
+      font-size: 0.8rem; font-weight: 500;
+      padding: 0.4rem 1rem; border-radius: 100px;
+      background: var(--surface); color: var(--text);
+      border: 1px solid var(--border);
+      transition: background 0.2s, color 0.2s;
+    }
+    .tech-chip:hover { background: var(--blue); color: var(--white); border-color: var(--blue); }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--white); }
+    .timeline { margin-top: 3rem; position: relative; }
+    .timeline::before {
+      content: ''; position: absolute; left: 20px; top: 0; bottom: 0;
+      width: 2px; background: var(--border);
+    }
+    .timeline-item { position: relative; padding-left: 60px; margin-bottom: 2.5rem; }
+    .timeline-dot {
+      position: absolute; left: 10px; top: 4px;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .timeline-dot::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--white); }
+    .timeline-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .timeline-card:hover { border-color: var(--blue); box-shadow: 0 4px 16px rgba(37,99,235,0.08); }
+    .timeline-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; }
+    .timeline-role {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 1.05rem; color: var(--text);
+    }
+    .timeline-period {
+      font-size: 0.78rem; font-weight: 600;
+      color: var(--blue); background: rgba(37,99,235,0.08);
+      padding: 0.25rem 0.75rem; border-radius: 100px;
+      border: 1px solid rgba(37,99,235,0.18); white-space: nowrap;
+    }
+    .timeline-company { font-size: 0.88rem; color: var(--muted); margin-bottom: 1rem; }
+    .timeline-company strong { color: var(--text); font-weight: 600; }
+    .timeline-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .timeline-bullets li {
+      font-size: 0.875rem; color: var(--muted); line-height: 1.65;
+      padding-left: 1.2rem; position: relative;
+    }
+    .timeline-bullets li::before {
+      content: ''; position: absolute; left: 0; top: 0.55rem;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--blue);
+    }
+
+    /* ── CERTIFICATIONS ── */
+    #certifications { background: var(--offwhite); }
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
+    .cert-card {
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 1.5rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .cert-card:hover {
+      border-color: var(--blue); box-shadow: 0 4px 20px rgba(37,99,235,0.1);
+      transform: translateY(-2px);
+    }
+    .cert-icon {
+      width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;
+      background: var(--grad); display: flex; align-items: center;
+      justify-content: center; font-size: 1.4rem;
+    }
+    .cert-card h4 { font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; color: var(--text); margin-bottom: 0.3rem; }
+    .cert-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+    .cert-issuer { display: inline-block; margin-top: 0.6rem; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--blue); }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--white); }
+    .edu-card {
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.75rem;
+      max-width: 640px; margin-top: 2rem;
+    }
+    .edu-icon {
+      width: 52px; height: 52px; border-radius: 12px; flex-shrink: 0;
+      background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+    }
+    .edu-content h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 0.25rem; }
+    .edu-content p { font-size: 0.85rem; color: var(--muted); }
+    .edu-year { margin-top: 0.6rem; font-size: 0.78rem; font-weight: 600; color: var(--blue); }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--navy);
+      text-align: center;
+      padding: 6rem 6vw;
+    }
+    #contact .section-label { color: var(--sky); }
+    #contact .section-title { color: var(--white); }
+    #contact .section-sub { color: rgba(255,255,255,0.5); margin: 0.75rem auto 3rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .contact-btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 0.85rem 1.75rem;
+      border-radius: 10px;
+      font-weight: 600; font-size: 0.9rem;
+      text-decoration: none;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .contact-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+    .contact-btn.primary { background: var(--grad); color: var(--white); }
+    .contact-btn.outline { border: 1.5px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); }
+    .contact-btn.outline:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080f18; text-align: center;
+      padding: 1.5rem 6vw;
+      font-size: 0.78rem; color: rgba(255,255,255,0.25);
+    }
+    footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+    footer a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ── FADE-IN ── */
+    .fade-up {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-stats { position: static; display: flex; gap: 1.5rem; margin-top: 3rem; }
+      .stat { text-align: left; }
+      .about-grid { grid-template-columns: 1fr; }
+      .timeline::before { left: 14px; }
+      .timeline-item { padding-left: 44px; }
+      .timeline-dot { left: 4px; }
+      #hero { padding: 100px 6vw 60px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up { transition: none; }
+      * { animation-duration: 0ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">CS<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="/contact.html" class="nav-cta">Hire Me</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu(this)">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Available for Senior Roles</div>
+    <h1 class="hero-name">Chandra Sekhar<br><span class="accent">Noolu</span></h1>
+    <p class="hero-role">Oracle Fusion Cloud SCM &amp; EBS Functional Consultant</p>
+    <p class="hero-desc">
+      Oracle Fusion Cloud SCM Specialist with 4+ years of full-lifecycle ERP implementation experience. Cloud-first delivery across P2P, O2C, Inventory, WMS, Manufacturing, and Cost Management — for mid-to-large enterprise clients.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16v12H4z"/><path d="M4 4l8 8 8-8"/></svg>
+        Get In Touch
+      </a>
+      <a href="#expertise" class="btn-outline">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        View My Work
+      </a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Years</div></div>
+    <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Modules</div></div>
+    <div class="stat"><div class="stat-num">0</div><div class="stat-label">Data Loss</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label fade-up">About Me</p>
+  <h2 class="section-title fade-up">The consultant behind<br>the configuration.</h2>
+  <div class="about-grid">
+    <div class="about-card fade-up">
+      <div class="avatar-ring">CS</div>
+      <h3>Chandra Sekhar Noolu</h3>
+      <p>Oracle SCM Functional Consultant</p>
+      <div class="about-meta">
+        <div class="meta-row">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span><strong>Hyderabad</strong>, India</span>
+        </div>
+        <div class="meta-row">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+          <span><strong>Innovacx Tech Labs</strong> Pvt. Ltd.</span>
+        </div>
+        <div class="meta-row">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.8 19.8 0 013.09 5.18 2 2 0 015.07 3h3a2 2 0 012 1.72c.13 1 .36 1.95.7 2.85a2 2 0 01-.45 2.11L9.09 11a16 16 0 006.91 6.91l1.32-1.23a2 2 0 012.11-.45c.9.34 1.85.57 2.85.7A2 2 0 0122 16.92z"/></svg>
+          <span><strong>+91 9502220321</strong></span>
+        </div>
+      </div>
+    </div>
+    <div class="about-content fade-up">
+      <h3>Connecting systems. Delivering outcomes.</h3>
+      <p>
+        I'm an Oracle Fusion Cloud SCM Functional Consultant with 4+ years of hands-on experience implementing and optimizing Supply Chain Management solutions across Oracle Fusion Cloud and EBS R12. My work spans the full supply chain spectrum — from procurement workflows and order fulfillment to warehouse operations and cost management.
+      </p>
+      <p>
+        At Innovacx Tech Labs, I've led end-to-end implementations, requirements gathering, functional design, UAT coordination, and post-go-live support. I specialize in translating business complexity into clean Oracle configurations that actually work for the people using them.
+      </p>
+      <p>
+        I hold a B.Tech in Mechanical Engineering from Pydah College of Engineering (JNTUK), which gives me a strong foundation in understanding manufacturing and operations — not just configuring them.
+      </p>
+      <div class="about-tags">
+        <span class="tag">P2P</span>
+        <span class="tag">O2C</span>
+        <span class="tag">Inventory</span>
+        <span class="tag">WMS</span>
+        <span class="tag">Manufacturing</span>
+        <span class="tag">BOM / WIP</span>
+        <span class="tag">Cost Management</span>
+        <span class="tag">PIM</span>
+        <span class="tag">Oracle EBS R12</span>
+        <span class="tag">Fusion Cloud</span>
+        <span class="tag">OTBI / BI Publisher</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="expertise-header">
+    <p class="section-label fade-up">Core Expertise</p>
+    <h2 class="section-title fade-up">Oracle module depth<br>across the supply chain.</h2>
+    <p class="section-sub fade-up">End-to-end coverage across both Oracle Fusion Cloud and EBS R12 — from sourcing to settlement, order to delivery.</p>
+  </div>
+
+  <div class="pipeline-label fade-up">Oracle Fusion Cloud SCM Modules</div>
+  <div class="pipeline-grid fade-up">
+    <div class="pipeline-card">
+      <div class="pipeline-icon">📦</div>
+      <h4>Procure to Pay (P2P)</h4>
+      <p>Requisitions, POs, supplier invoices, approval workflows, BPM configuration.</p>
+      <span class="pipeline-badge">Fusion + EBS</span>
+    </div>
+    <div class="pipeline-card">
+      <div class="pipeline-icon">🚚</div>
+      <h4>Order to Cash (O2C)</h4>
+      <p>Sales orders, pricing, shipping, invoicing, returns, OM setup &amp; extensibility.</p>
+      <span class="pipeline-badge">Fusion + EBS</span>
+    </div>
+    <div class="pipeline-card">
+      <div class="pipeline-icon">🏭</div>
+      <h4>Inventory Management</h4>
+      <p>Org structures, subinventories, items, transactions, cycle counting &amp; ABC analysis.</p>
+      <span class="pipeline-badge">Fusion + EBS</span>
+    </div>
+    <div class="pipeline-card">
+      <div class="pipeline-icon">🗄️</div>
+      <h4>Warehouse Management (WMS)</h4>
+      <p>Inbound/outbound flows, pick rules, task dispatching, RF/mobile operations.</p>
+      <span class="pipeline-badge">EBS WMS</span>
+    </div>
+    <div class="pipeline-card">
+      <div class="pipeline-icon">⚙️</div>
+      <h4>Manufacturing &amp; WIP</h4>
+      <p>Discrete manufacturing, work orders, job completions, resource scheduling.</p>
+      <span class="pipeline-badge">EBS Mfg</span>
+    </div>
+    <div class="pipeline-card">
+      <div class="pipeline-icon">📐</div>
+      <h4>BOM &amp; Routing</h4>
+      <p>Bill of materials structure, item revisions, routings, operations, resources.</p>
+      <span class="pipeline-badge">EBS + Fusion</span>
+    </div>
+    <div class="pipeline-card">
+      <div class="pipeline-icon">💰</div>
+      <h4>Cost Management</h4>
+      <p>Standard &amp; actual costing, cost rollup, overhead absorption, variance analysis.</p>
+      <span class="pipeline-badge">EBS Costing</span>
+    </div>
+    <div class="pipeline-card">
+      <div class="pipeline-icon">🏷️</div>
+      <h4>PIM / Item Master</h4>
+      <p>Product hub, item creation, catalog categories, attributes &amp; value sets.</p>
+      <span class="pipeline-badge">Fusion PIM</span>
+    </div>
+  </div>
+
+  <div class="pipeline-label fade-up" style="margin-top:3rem;">Tools &amp; Technologies</div>
+  <div class="tech-row fade-up">
+    <span class="tech-chip">Oracle Fusion Cloud</span>
+    <span class="tech-chip">Oracle EBS R12</span>
+    <span class="tech-chip">OTBI</span>
+    <span class="tech-chip">BI Publisher</span>
+    <span class="tech-chip">FBDI / HDL</span>
+    <span class="tech-chip">BPM Workflow</span>
+    <span class="tech-chip">SOAP / REST APIs</span>
+    <span class="tech-chip">SQL / PL-SQL</span>
+    <span class="tech-chip">Postman</span>
+    <span class="tech-chip">Oracle SmartView</span>
+    <span class="tech-chip">Jira / Confluence</span>
+    <span class="tech-chip">MS Excel / VBA</span>
+    <span class="tech-chip">Oracle MyLearn</span>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label fade-up">Work Experience</p>
+  <h2 class="section-title fade-up">Built in the field,<br>not just in training.</h2>
+  <div class="timeline fade-up">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-top">
+          <div class="timeline-role">Oracle Fusion Cloud SCM Consultant</div>
+          <div class="timeline-period">May 2022 – Present</div>
+        </div>
+        <div class="timeline-company"><strong>Innovacx Tech Labs Pvt. Ltd.</strong> · Hyderabad, India · Full-time</div>
+        <ul class="timeline-bullets">
+          <li>Delivered multiple full-cycle Oracle ERP implementations across Oracle Fusion Cloud SCM and EBS environments — P2P, O2C, Inventory, WMS, Manufacturing, BOM, WIP, and Cost Management — achieving on-time go-live across all engagements.</li>
+          <li>Led end-to-end decommission of legacy custom applications and migrated 100% of process manufacturing operations onto Oracle OPM, eliminating manual workarounds and reducing transaction processing time significantly.</li>
+          <li>Spearheaded WMS migrations from third-party systems to Oracle WMS, mapping 100% of legacy warehouse workflows through rigorous fit-gap analysis with zero post-cutover process gaps.</li>
+          <li>Architected full warehouse structures — subinventories, locators, and LPN configurations — enabling barcode-driven, mobile warehouse operations from Day 1 of go-live.</li>
+          <li>Configured SaaS security roles, access setups, and module-level configurations across Oracle Fusion Cloud SCM to meet client compliance and RBAC requirements.</li>
+          <li>Executed full FBDI data migrations from legacy systems with zero critical data-loss incidents, validated across all master and transactional data sets before cutover.</li>
+          <li>Reduced requirement-to-solution gaps by ~30% through structured stakeholder discovery sessions, translating business needs into FDDs, setup documents, and BRDs aligned to Oracle functionality.</li>
+          <li>Served as senior functional lead across 2 client engagements — primary point of contact after the Project Manager — owning end-to-end client communication, delivery accountability, and issue escalation.</li>
+          <li>Accelerated junior consultant onboarding by ~40% by designing structured mentoring frameworks and reusable FDD/setup document templates adopted team-wide.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <p class="section-label fade-up">Certifications</p>
+  <h2 class="section-title fade-up">Oracle certified.<br>Field validated.</h2>
+  <div class="cert-grid fade-up">
+    <div class="cert-card">
+      <div class="cert-icon">🎯</div>
+      <div>
+        <h4>Oracle Cloud Project Management Practitioner</h4>
+        <p>Hands-on proficiency in Oracle Fusion Cloud project execution, task management, and resource planning.</p>
+        <span class="cert-issuer">Oracle · Cloud Certified</span>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <h4>Oracle Foundation Associate</h4>
+        <p>Foundational certification covering Oracle Cloud architecture, core SaaS modules, and platform principles.</p>
+        <span class="cert-issuer">Oracle · Associate</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label fade-up">Education</p>
+  <h2 class="section-title fade-up">Academic foundation.</h2>
+  <div class="edu-card fade-up">
+    <div class="edu-icon">🎓</div>
+    <div class="edu-content">
+      <h3>Bachelor of Technology — Mechanical Engineering</h3>
+      <p>Pydah College of Engineering &amp; Technology · JNTUK · Visakhapatnam, Andhra Pradesh</p>
+      <p class="edu-year">Graduated 2020</p>
+    </div>
+  </div>
+  <div class="edu-card fade-up" style="margin-top:1rem;">
+    <div class="edu-icon">📜</div>
+    <div class="edu-content">
+      <h3>Diploma — Mechanical Engineering</h3>
+      <p>Pydah College of Engineering · SBTET · Visakhapatnam, Andhra Pradesh</p>
+      <p class="edu-year">Graduated 2017</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Let's Connect</p>
+  <h2 class="section-title">Open to the right<br>Oracle opportunity.</h2>
+  <p class="section-sub">Senior SCM Functional Consultant roles, Solution Architect positions, or Oracle Cloud implementation projects — let's talk.</p>
+  <div class="contact-links">
+    <a href="mailto:chandrasekhar.nds@gmail.com" class="contact-btn primary">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16v12H4z"/><path d="M4 4l8 8 8-8"/></svg>
+      chandrasekhar.nds@gmail.com
+    </a>
+    <a href="https://linkedin.com/in/chandrasekharnoolu" target="_blank" class="contact-btn outline">
+      <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn
+    </a>
+    <a href="ChandraSekharNoolu_Resume.pdf" download class="contact-btn outline">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download CV
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Chandra Sekhar Noolu · Built with HTML &amp; CSS · <a href="#hero">Back to top ↑</a></p>
+</footer>
+
+<script>
+  // Animated pipeline canvas in hero
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let nodes = [], W, H;
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function initNodes(n) {
+    nodes = Array.from({ length: n }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      r: Math.random() * 2 + 1
+    }));
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (let i = 0; i < nodes.length; i++) {
+      let a = nodes[i];
+      a.x += a.vx; a.y += a.vy;
+      if (a.x < 0 || a.x > W) a.vx *= -1;
+      if (a.y < 0 || a.y > H) a.vy *= -1;
+      for (let j = i + 1; j < nodes.length; j++) {
+        let b = nodes[j];
+        let dx = a.x - b.x, dy = a.y - b.y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 130) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(37,99,235,${(1 - dist / 130) * 0.5})`;
+          ctx.lineWidth = 0.8;
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(14,165,233,0.7)';
+      ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  initNodes(55);
+  draw();
+  window.addEventListener('resize', () => { resize(); initNodes(55); });
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Mobile nav
+  function toggleMenu(el) {
+    const links = document.querySelector('.nav-links');
+    const open = links.style.display === 'flex';
+    links.style.display = open ? 'none' : 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '64px';
+    links.style.left = '0'; links.style.right = '0';
+    links.style.background = 'rgba(13,27,42,0.97)';
+    links.style.padding = '1.5rem 6vw 2rem';
+    links.style.gap = '1.25rem';
+  }
+</script>
+</body>
+</html>

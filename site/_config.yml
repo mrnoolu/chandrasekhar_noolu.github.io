@@ -1,0 +1,41 @@
+title: "Chandra Sekhar Noolu"
+description: "Oracle Fusion Cloud SCM Functional Consultant | P2P · O2C · Inventory · WMS · Manufacturing"
+url: "https://chandrasekharnoolu.netlify.app"
+baseurl: ""
+
+author:
+  name: "Chandra Sekhar Noolu"
+  email: "chandrasekhar.nds@gmail.com"
+  linkedin: "https://linkedin.com/in/chandrasekharnoolu"
+  location: "Hyderabad, India"
+
+# Build
+permalink: /blog/:year/:month/:day/:title/
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - node_modules/
+  - .DS_Store
